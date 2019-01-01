@@ -1,0 +1,114 @@
+#   __                  _   _
+#  / _|_   _ _ __   ___| |_(_) ___  _ __  ___
+# | |_| | | | '_ \ / __| __| |/ _ \| '_ \/ __|
+# |  _| |_| | | | | (__| |_| | (_) | | | \__ \
+# |_|  \__,_|_| |_|\___|\__|_|\___/|_| |_|___/
+
+function getIPs {
+    # display both wanip and lanip
+    printf "WAN IP: $(wanip)\nLAN IP: $(lanip)\n"
+}
+
+function osInfo {
+
+    # try and determine OS and Version
+
+    if [ -f "/etc/os-release" ]; then
+        # source the variables
+        . /etc/os-release
+        local __osDistribution=$NAME
+        local __osVersion=$VERSION
+    elif [ $(type lsb_release >/dev/null 2>&1) ]; then
+        # try lsb_release command
+        local __osDistribution="$(lsb_release -si)"
+        local __osVersion="$(lsb_release -sr)"
+    elif [ -f "/etc/lsb-release" ]; then
+        # source the variables
+        . /etc/lsb-release
+        local __osDistribution=$DISTRIB_ID
+        local __osVersion=$DISTRIB_RELEASE
+    else
+        # last but not least
+        local __osDistribution="$(uname -s)"
+        local __osVersion="$(uname -r)"
+    fi
+
+    printf "${__osDistribution} ${__osVersion}\n"
+}
+
+function osUpdateUpgrade {
+
+    # determine OS update command
+
+    # for Debian based distro
+    if [ -n "$(command -v apt-get)" ]; then
+        # update packages
+        sudo apt-get update
+
+        # upgrade option enforced
+        if [ "$1" -eq 1 ]; then
+            # upgrade packages
+            sudo apt-get upgrade -y
+
+            # clean up unused packages
+            sudo apt autoremove -y
+
+            # check if reboot is required
+            if [ -f "/var/run/reboot-required" ]; then
+                printf "A System Restart is required!\n"
+            fi
+        fi
+
+    # for RedHat/CentOS distro
+    elif [ -n "$(command -v yum)" ]; then
+        # update packages
+        yum check-update
+
+        # upgrade option enforced
+        if [ "$1" -eq 1 ]; then
+            # upgrade packages
+            yum update -y
+
+            # clean up unused packages
+            yum autoremove -y
+        fi
+
+    # for cygwin
+    elif [ -n "$(command -v apt-cyg)" ]; then
+        # update packages
+        apt-cyg update
+
+        # upgrade option enforced
+        if [ "$1" -eq 1 ]; then
+            printf "There is no Upgrade option in CYGWIN\n"
+        fi
+    else
+        printf "Could not determine OS update/upgrade method\n"
+    fi
+}
+
+function os () {
+
+    case "$1" in
+        "update" )
+                # run os update command
+                osUpdateUpgrade 0
+            ;;
+        "upgrade" )
+                #  run os upgrade command
+                osUpdateUpgrade 1
+            ;;
+        "info" )
+                # run od info command
+                osInfo
+            ;;
+        * )
+            printf "Option not recognized\n"
+            printf "Usage: os [ARGUMENT]"
+            printf "\tupdate\n"
+            printf "\tupgrade\n"
+            printf "\tinfo\n"
+            exit 1
+            ;;
+    esac
+}

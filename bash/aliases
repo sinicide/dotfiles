@@ -1,0 +1,74 @@
+#        _ _
+#   __ _| (_) __ _ ___  ___  ___
+#  / _` | | |/ _` / __|/ _ \/ __|
+# | (_| | | | (_| \__ \  __/\__ \
+#  \__,_|_|_|\__,_|___/\___||___/
+
+# source functions
+source ~/dotfiles/bash/functions
+
+# ls
+alias ls='ls --color=auto --sort=extension  --group-directories-first'
+alias ll='ls -lFh'
+alias la='ll -A'
+alias l='ll -CF'
+
+# grep
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+
+# safety features
+alias chown='chown --preserve-root'
+alias chmod='chmod --preserve-root'
+alias chgrp='chgrp --preserve-root'
+
+# dmesg
+alias dmesg='dmesg -T'
+
+# tree
+alias tree='tree -Csu'
+
+# Create directories and sub directories by default
+alias mkdir='mkdir -pv'
+
+# redo with sudo
+alias redo='sudo !!'
+
+# reload the .bash_profile
+alias reload="source ~/.bash_profile"
+
+# apt-get specific
+if [ "$(command -v apt-get)" ]; then
+    # change regular apt-get to always sudo apt-get because reasons
+    alias apt-get="sudo apt-get"
+fi
+
+# yum specific
+if [ "$(command -v yum)" ]; then
+    # change regular yum to always sudo yum because reasons
+    alias yum="sudo yum"
+fi
+
+# Network (only works in linux environments)
+if [ "$(uname -s | grep -ic 'linux')" -eq 1 ]; then
+
+    # get my WAN IP
+    alias wanip="dig +short myip.opendns.com @resolver1.opendns.com"
+    # get my LAN IP
+    alias lanip="ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'"
+
+    # display both WAN and LAN IPs
+    alias myip=getIPs
+fi
+
+# run my custom OS function
+alias os=os
+
+# CYGWIN specific
+if [ "$(uname -s | grep -ic 'cygwin')" -eq 1 ]; then
+
+    # opening explorer within Cygwin
+    alias open='cygstart'
+
+fi

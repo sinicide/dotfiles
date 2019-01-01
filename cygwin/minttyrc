@@ -1,0 +1,14 @@
+Transparency=medium
+OpaqueWhenFocused=yes
+CursorType=block
+Font=Menlo
+FontHeight=10
+Locale=en_US
+Charset=UTF-8
+CopyAsHTML=16777216
+MiddleClickAction=void
+RightClickAction=paste
+Term=xterm-256color
+BellType=0
+BackgroundColour=50,50,50
+CursorColour=214,214,214
