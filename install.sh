@@ -134,7 +134,7 @@ while true; do
     # take in input
     read -p "Enter Choice: " choice
 
-    case "$choice" in;
+    case "$choice" in
         0 )
             # automatic install and setup
             installApps
