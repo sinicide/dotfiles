@@ -50,7 +50,7 @@ function setupVIM () {
     ln -fs "/home/$(whoami)/dotfiles/vim/vimrc" ~/.vimrc
 
     # download vim themes
-    curl -s -o https://raw.githubusercontent.com/Yggdroot/duoduo/master/colors/duoduo.vim
+    curl -s -O https://raw.githubusercontent.com/Yggdroot/duoduo/master/colors/duoduo.vim
     mv duoduo.vim vim/colors/
 
 }
