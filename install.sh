@@ -7,14 +7,14 @@
 
 function createBackupDir () {
 
-    local __bkdir="/home/$(whoami)/.bk/$(date +%Y-%m-%d-%H%M%S)"
+    local __bkdir="~/.bk/$(date +%Y-%m-%d-%H%M%S)"
     # create a backup directory if it doesn't exist
     mkdir -p "$__bkdir"
 
     # move files into backup directory
     for i in .bash_profile .bashrc .profile .vimrc .viminfo .alias; do
         # if not a symlink, backup the file
-        if [ ! -h "/home/$(whoami)/$i" ]; then
+        if [ ! -h "~/$i" ]; then
             mv "$i" "$__bkdir"
         fi
 
@@ -24,34 +24,34 @@ function createBackupDir () {
 function setupBash () {
 
     # deploy symlinks to new files
-    if [ -f "/home/$(whoami)/dotfiles/bash/bashrc" ]; then
-        ln -fs "/home/$(whoami)/dotfiles/bash/bashrc" ~/.bashrc
+    if [ -f "~/dotfiles/bash/bashrc" ]; then
+        ln -fs "~/dotfiles/bash/bashrc" ~/.bashrc
     else
-        printf "/home/$(whoami)/dotfiles/bash/bashrc NOT FOUND\n"
+        printf "~/dotfiles/bash/bashrc NOT FOUND\n"
     fi
 
-    if [ -f "/home/$(whoami)/dotfiles/bash/bash_profile" ]; then
+    if [ -f "~/dotfiles/bash/bash_profile" ]; then
         ln -fs ~/dotfiles/bash/bash_profile ~/.bash_profile
     else
-        printf "/home/$(whoami)/dotfiles/bash/bash_profile NOT FOUND\n"
+        printf "~/dotfiles/bash/bash_profile NOT FOUND\n"
     fi
 
     # reload .bash_profile
-    source "/home/$(whoami)/.bash_profile"
+    source "~/.bash_profile"
 
 }
 
 function setupVIM () {
 
-    mkdir -pv "/home/$(whoami)/.vim/colors"
+    mkdir -pv "~/.vim/colors"
     # symlink the vim color directory
-    ln -fs "/home/$(whoami)/dotfiles/vim/colors" ~/.vim/colors
+    ln -fs "~/dotfiles/vim/colors" ~/.vim/colors
     # symlink over vim stuff
-    ln -fs "/home/$(whoami)/dotfiles/vim/vimrc" ~/.vimrc
+    ln -fs "~/dotfiles/vim/vimrc" ~/.vimrc
 
     # download vim themes
     curl -s -O https://raw.githubusercontent.com/Yggdroot/duoduo/master/colors/duoduo.vim
-    mv duoduo.vim vim/colors/
+    mv duoduo.vim ~/dotfiles/vim/colors/
 
 }
 
