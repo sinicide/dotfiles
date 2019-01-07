@@ -25,19 +25,19 @@ function setupBash () {
 
     # deploy symlinks to new files
     if [ -f "$(find ~/dotfiles/bash/bashrc -type f)" ]; then
-        ln -fs "~/dotfiles/bash/bashrc" "~/.bashrc"
+        ln -fs "~/dotfiles/bash/bashrc" ~/.bashrc
     else
         printf "~/dotfiles/bash/bashrc NOT FOUND\n"
     fi
 
     if [ -f "$(find ~/dotfiles/bash/bash_profile -type f)" ]; then
-        ln -fs "~/dotfiles/bash/bash_profile" "~/.bash_profile"
+        ln -fs "~/dotfiles/bash/bash_profile" ~/.bash_profile
     else
         printf "~/dotfiles/bash/bash_profile NOT FOUND\n"
     fi
 
     # reload .bash_profile
-    source "~/.bash_profile"
+    source ~/.bash_profile
 
 }
 
@@ -45,9 +45,9 @@ function setupVIM () {
 
     mkdir -pv "~/.vim/colors"
     # symlink the vim color directory
-    ln -fs "~/dotfiles/vim/colors" "~/.vim/colors"
+    ln -fs "~/dotfiles/vim/colors" ~/.vim/colors
     # symlink over vim stuff
-    ln -fs "~/dotfiles/vim/vimrc" "~/.vimrc"
+    ln -fs "~/dotfiles/vim/vimrc" ~/.vimrc
 
     # download vim themes
     curl -s -O https://raw.githubusercontent.com/Yggdroot/duoduo/master/colors/duoduo.vim
