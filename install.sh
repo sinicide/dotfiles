@@ -43,7 +43,7 @@ function setupBash () {
 
 function setupVIM () {
 
-    mkdir -p ~/.vim/colors
+    mkdir -p ~/dotfiles/vim/colors
     # symlink the vim color directory
     ln -fs ~/dotfiles/vim/colors ~/.vim/colors
     # symlink over vim stuff
