@@ -45,7 +45,7 @@ function setupVIM () {
 
     mkdir -p ~/dotfiles/vim/colors
     # symlink the vim color directory
-    ln -fs ~/dotfiles/vim/colors ~/.vim/colors
+    ln -fs ~/dotfiles/vim ~/.vim
     # symlink over vim stuff
     ln -fs ~/dotfiles/vim/vimrc ~/.vimrc
 
