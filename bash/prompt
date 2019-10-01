@@ -51,3 +51,4 @@ function buildPrompt {
     unset color_prompt
 }
 export PROMPT_COMMAND=buildPrompt
+echo -ne "\e]0;$(hostname)\a"
