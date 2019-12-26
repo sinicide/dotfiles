@@ -72,3 +72,10 @@ if [ "$(uname -s | grep -ic 'cygwin')" -eq 1 ]; then
     alias open='cygstart'
 
 fi
+
+# WSL specific
+if [ "$(printenv | grep -c WSL_*)" -gt 0 ] && [ "$(which explorer.exe)" ]; then
+    
+    # open given directory in explorer.exe
+    alias open='explorer.exe'
+fi
