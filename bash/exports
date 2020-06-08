@@ -12,5 +12,10 @@ export EDITOR=vim
 export GOPATH="$HOME/go"
 PATH="$PATH:/usr/local/go/bin:$GOPATH/bin"
 
+# Add shell_scripts directory if shell_scripts exists
+if [ -d "$HOME/dotfiles/shell_scripts" ]; then
+    PATH=$PATH:$HOME/dotfiles/shell_scripts
+fi
+
 # Export PATH
 export PATH
