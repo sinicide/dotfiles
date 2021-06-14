@@ -9,13 +9,16 @@
 export EDITOR=vim
 
 # Set GO Path
-export GOPATH="$HOME/go"
-PATH="$PATH:/usr/local/go/bin:$GOPATH/bin"
+export GOPATH="$HOME/projects/go"
+PATH="$PATH:$GOPATH/bin"
 
 # Add shell_scripts directory if shell_scripts exists
 if [ -d "$HOME/dotfiles/shell_scripts" ]; then
     PATH=$PATH:$HOME/dotfiles/shell_scripts
 fi
+
+# local python3 qmk
+PATH="$PATH:$HOME/.local/bin"
 
 # Export PATH
 export PATH
