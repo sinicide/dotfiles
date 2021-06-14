@@ -70,7 +70,7 @@ function installAptCyg () {
 
 function installApps () {
 
-    local __apps=(vim tmux zip unzip rar unrar rsync curl pv git wget bc)
+    local __apps=(vim tmux zip unzip rar unrar rsync curl pv git wget bc gh)
     local __appsLinux=(htop)
     local __appsCygwin=()
 
