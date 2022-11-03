@@ -1,3 +1,6 @@
+# DEPRECATED
+In favor of my new [https://github.com/sinicide/.dotfiles](https://github.com/sinicide/.dotfiles
+
 # Huy Nguyen's dotfiles
 Dotfiles, it's all the rage! This is my take on dotfiles configuration for my own personal use.
 
